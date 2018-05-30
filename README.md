@@ -10,27 +10,42 @@ Some parts of code, docs, tests are copy-pasted with no changes.
 Add plugin
 ----------
 
-Add the plugin to `project/plugins.sbt`. For example:
+Add the plugin to `project/plugins.sbt` (it must all be there and not build.sbt for plugin to initialize):
 
 ```scala
-resolvers += (
-  "bintray-nitram509-jbrotli" at "http://dl.bintray.com/nitram509/jbrotli"
-)
+val brotliNativeArtefact = {
 
-// Brotli itself implemented in C, so you need native `.so/.dll` library in your classpath.
-// All pre-built arch at https://dl.bintray.com/nitram509/jbrotli/org/meteogroup/jbrotli/
-// UNCOMMENT one or more architectures, suitable for your needs:
+  val osName = System.getProperty("os.name").toLowerCase
+  val osArch = System.getProperty("os.arch").toLowerCase
+
+  val family = if (osName.startsWith("linux")) {
+    "linux"
+  } else if (osName.startsWith("mac os x") || osName.startsWith("darwin")) {
+    "darwin"
+  } else {
+    "win32"
+  }
+
+  val arch = if (family == "darwin") {
+    "x86-amd64"
+  } else if (osArch == "i386" || osArch == "i486" || osArch == "i586" || osArch == "i686") {
+    "x86"
+  } else if (osArch == "amd64" || osArch == "x86-64" || osArch == "x64") {
+    "x86-amd64"
+  } else if (family == "linux" && osArch.startsWith("arm")) {
+    "arm32-vfp-hflt"
+  }
+
+  s"jbrotli-native-$family-$arch"
+}
+
 libraryDependencies ++= Seq(
-  //"org.meteogroup.jbrotli" % "jbrotli-native-darwin-x86-amd64" % "0.5.0"
-  //"org.meteogroup.jbrotli" % "jbrotli-native-linux-arm32-vfp-hflt" % "0.5.0"
-  //"org.meteogroup.jbrotli" % "jbrotli-native-linux-x86-amd64" % "0.5.0"
-  //"org.meteogroup.jbrotli" % "jbrotli-native-win32-x86-amd64" % "0.5.0"
-  //"org.meteogroup.jbrotli" % "jbrotli-native-win32-x86" % "0.5.0"
+  "org.meteogroup.jbrotli" % brotliNativeArtefact % "0.5.0"
 )
 
-// PUBLIC REPO NOT READY YET, SORRY. RE-BUILD SOURCES BY HANDS
-addSbtPlugin("io.suggest" % "sbt-web-brotli" % "0.5.6-SNAPSHOT")
+addSbtPlugin("com.github.enalmada" % "sbt-web-brotli" % "0.5.5")
 ```
+
 
 Your project's build file also needs to enable sbt-web plugins. For example with build.sbt:
 

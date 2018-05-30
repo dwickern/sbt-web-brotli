@@ -1,14 +1,13 @@
 package io.suggest.sbt.brotli
 
 import java.io.{BufferedInputStream, BufferedOutputStream, FileInputStream, FileOutputStream}
-import java.nio.file.Files
 
-import sbt._
 import com.typesafe.sbt.web.SbtWeb
 import com.typesafe.sbt.web.pipeline.Pipeline
-import sbt.Keys._
-import org.meteogroup.jbrotli._
 import org.meteogroup.jbrotli.libloader.BrotliLibraryLoader
+import org.meteogroup.jbrotli.{Brotli, _}
+import sbt.Keys._
+import sbt._
 
 import scala.annotation.tailrec
 
@@ -20,7 +19,9 @@ object Import {
 
 object SbtWebBrotli extends AutoPlugin {
 
+
   BrotliLibraryLoader.loadBrotli()
+
 
   private val READ_BUFFER_SIZE_BYTES = 4096
 
@@ -55,16 +56,16 @@ object SbtWebBrotli extends AutoPlugin {
         val brotliFile = targetDir / brotliPath
         brotliFile.getParentFile.mkdirs()
 
-        val streamCompressor = new BrotliStreamCompressor( Brotli.DEFAULT_PARAMETER )
-        val input = new BufferedInputStream( new FileInputStream( file ) )
-        val output = new BufferedOutputStream( new FileOutputStream(brotliFile, false) )
+        val streamCompressor = new BrotliStreamCompressor(Brotli.DEFAULT_PARAMETER)
+        val input = new BufferedInputStream(new FileInputStream(file))
+        val output = new BufferedOutputStream(new FileOutputStream(brotliFile, false))
 
         try {
-          val buf = Array.ofDim[Byte]( READ_BUFFER_SIZE_BYTES )
+          val buf = Array.ofDim[Byte](READ_BUFFER_SIZE_BYTES)
 
           @tailrec
           def __processChunk(): Unit = {
-            val bytesRead = input.read( buf )
+            val bytesRead = input.read(buf)
 
             val compressedBytes = if (bytesRead < 0) {
               streamCompressor.compressArray(Array.empty, true)
