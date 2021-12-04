@@ -1,4 +1,4 @@
-package io.suggest.sbt.brotli
+package com.github.dwickern.sbt.brotli
 
 import com.nixxcode.jvmbrotli.common.BrotliLoader
 import com.nixxcode.jvmbrotli.enc.BrotliOutputStream

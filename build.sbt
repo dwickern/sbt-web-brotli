@@ -1,4 +1,4 @@
-organization := "com.github.enalmada"
+organization := "com.github.dwickern"
 name := "sbt-web-brotli"
 description := "sbt-web plugin for brotling assets"
 sbtPlugin := true
@@ -40,7 +40,7 @@ libraryDependencies ++= Seq(
 
 publishTo := sonatypePublishToBundle.value
 pomExtra := {
-  <url>https://github.com/Enalmada/sbt-web-brotli</url>
+  <url>https://github.com/dwickern/sbt-web-brotli</url>
     <licenses>
       <license>
         <name>Apache 2</name>
@@ -48,11 +48,16 @@ pomExtra := {
       </license>
     </licenses>
     <scm>
-      <connection>scm:git:git@github.com:enalmada/sbt-web-brotli.git</connection>
-      <developerConnection>scm:git:git@github.com:enalmada/sbt-web-brotli.git</developerConnection>
-      <url>https://github.com/enalmada</url>
+      <connection>scm:git:git@github.com:dwickern/sbt-web-brotli.git</connection>
+      <developerConnection>scm:git:git@github.com:dwickern/sbt-web-brotli.git</developerConnection>
+      <url>https://github.com/dwickern</url>
     </scm>
     <developers>
+      <developer>
+        <id>dwickern</id>
+        <name>Derek Wickern</name>
+        <url>https://github.com/dwickern</url>
+      </developer>
       <developer>
         <id>enalmada</id>
         <name>Adam Lane</name>
