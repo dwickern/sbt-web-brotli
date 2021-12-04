@@ -13,35 +13,6 @@ Add plugin
 Add the plugin to `project/plugins.sbt` (it must all be there and not build.sbt for plugin to initialize):
 
 ```scala
-val brotliNativeArtifact = {
-  val osName = System.getProperty("os.name").toLowerCase
-  val osArch = System.getProperty("os.arch").toLowerCase
-
-  val family = if (osName.startsWith("linux")) {
-    "linux"
-  } else if (osName.startsWith("mac os x") || osName.startsWith("darwin")) {
-    "darwin"
-  } else {
-    "win32"
-  }
-
-  val arch = if (family == "darwin") {
-    "x86-amd64"
-  } else if (osArch == "i386" || osArch == "i486" || osArch == "i586" || osArch == "i686") {
-    "x86"
-  } else if (osArch == "amd64" || osArch == "x86-64" || osArch == "x64") {
-    "x86-amd64"
-  } else if (family == "linux" && osArch.startsWith("arm")) {
-    "arm32-vfp-hflt"
-  }
-
-  s"jvmbrotli-$family-$arch"
-}
-
-libraryDependencies ++= Seq(
-  "com.nixxcode.jvmbrotli" % brotliNativeArtifact % "0.2.0"
-)
-
 addSbtPlugin("com.github.dwickern" % "sbt-web-brotli" % "0.5.5")
 ```
 
