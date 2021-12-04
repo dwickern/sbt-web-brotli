@@ -1,5 +1,5 @@
-//addSbtPlugin("com.typesafe.sbt" % "sbt-web-build-base" % "1.2.0")
+addSbtPlugin("com.github.sbt" % "sbt-release" % "1.1.0")
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.10")
+addSbtPlugin("com.github.sbt" % "sbt-pgp" % "2.1.2")
 
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "2.3")
-
-addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.1.1")
+libraryDependencies += "org.scala-sbt" %% "scripted-plugin" % sbtVersion.value
