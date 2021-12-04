@@ -7,24 +7,26 @@ Rewritten from [sbt-gzip] sources, thanks to Typesafe/Lightbend.
 Some parts of code, docs, tests are copy-pasted with no changes.
 
 
-Add plugin
+Usage
 ----------
 
-Add the plugin to `project/plugins.sbt` (it must all be there and not build.sbt for plugin to initialize):
+Add the plugin to `project/plugins.sbt`:
 
 ```scala
 addSbtPlugin("com.github.dwickern" % "sbt-web-brotli" % "0.5.5")
 ```
 
-
-Your project's build file also needs to enable sbt-web plugins. For example with build.sbt:
-
-    lazy val root = (project.in file(".")).enablePlugins(SbtWeb)
-
-As with all sbt-web asset pipeline plugins you must declare their order of execution e.g.:
+Add `brotli` to the sbt-web asset pipeline in your `build.sbt`:
 
 ```scala
 pipelineStages := Seq(brotli)
+```
+
+Pipeline stages are only used in the production build.
+To see the output of your pipeline, run in your sbt shell:
+
+```
+> show webStage
 ```
 
 Configuration
@@ -32,30 +34,38 @@ Configuration
 
 ### Filters
 
-Include and exclude filters can be provided. For example, to only create
-brotli files for `.js` files:
+Include and exclude filters can be provided. For example, to only create brotli files for `.js` files:
 
 ```scala
-includeFilter in brotli := "*.js"
+brotli / includeFilter := "*.js"
 ```
 
 Or to exclude all `.js` files but include any other files:
 
 ```scala
-excludeFilter in brotli := "*.js"
+brotli / excludeFilter := "*.js"
 ```
 
-The '''default''' filters configured like this:
+The default filters configured like this:
 
 ```scala
-includeFilter in brotli := "*.html" || "*.css" || "*.js"
-
-excludeFilter in brotli := HiddenFileFilter || "*.woff" || "*.woff2" || "*.gz"
+brotli / includeFilter := "*.html" || "*.css" || "*.js"
+brotli / excludeFilter := HiddenFileFilter || "*.woff" || "*.woff2" || "*.gz"
 ```
 
-If you also using `sbt-gzip`, you may want configure it to ignore brotli-compressed files:
+### Usage with sbt-gzip
+
+If you also use `sbt-gzip`, make sure `brotli` comes after `gzip` in the pipeline:
+
 ```scala
-excludeFilter in gzip := "*.woff" || "*.woff2" || "*.br"
+pipelineStages := Seq(gzip, brotli)
+```
+
+Or, alternatively, configure `gzip` to ignore the brotli-compressed files:
+
+```scala
+pipelineStages := Seq(brotli, gzip)
+gzip / excludeFilter ~= { _ || "*.br" }
 ```
 
 License
