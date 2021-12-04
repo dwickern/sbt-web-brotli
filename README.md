@@ -1,7 +1,7 @@
 sbt-web-brotli
 ==========
 
-[sbt-web] plugin for brotli-compressing web assets using [jbrotli] bindings.
+[sbt-web] plugin for brotli-compressing web assets using [jvmbrotli] bindings.
 
 Rewritten from [sbt-gzip] sources, thanks to Typesafe/Lightbend.
 Some parts of code, docs, tests are copy-pasted with no changes.
@@ -13,8 +13,7 @@ Add plugin
 Add the plugin to `project/plugins.sbt` (it must all be there and not build.sbt for plugin to initialize):
 
 ```scala
-val brotliNativeArtefact = {
-
+val brotliNativeArtifact = {
   val osName = System.getProperty("os.name").toLowerCase
   val osArch = System.getProperty("os.arch").toLowerCase
 
@@ -36,11 +35,11 @@ val brotliNativeArtefact = {
     "arm32-vfp-hflt"
   }
 
-  s"jbrotli-native-$family-$arch"
+  s"jvmbrotli-$family-$arch"
 }
 
 libraryDependencies ++= Seq(
-  "org.meteogroup.jbrotli" % brotliNativeArtefact % "0.5.0"
+  "com.nixxcode.jvmbrotli" % brotliNativeArtifact % "0.2.0"
 )
 
 addSbtPlugin("com.github.enalmada" % "sbt-web-brotli" % "0.5.5")
@@ -93,7 +92,7 @@ License
 
 This code is licensed under the [Apache 2.0 License][apache].
 
-[jbrotli]: https://github.com/MeteoGroup/jbrotli
+[jvmbrotli]: https://github.com/nixxcode/jvm-brotli
 [sbt-gzip]: https://github.com/sbt/sbt-gzip
 [sbt-web]: https://github.com/sbt/sbt-web
 [apache]: http://www.apache.org/licenses/LICENSE-2.0.html

@@ -15,12 +15,8 @@ sbtVersion := "1.1.5"
 
 scalaVersion := "2.12.6"
 
-resolvers += (
-  "bintray-nitram509-jbrotli" at "http://dl.bintray.com/nitram509/jbrotli"
-)
 
-val brotliNativeArtefact = {
-
+val brotliNativeArtifact = {
   val osName = System.getProperty("os.name").toLowerCase
   val osArch = System.getProperty("os.arch").toLowerCase
 
@@ -42,12 +38,12 @@ val brotliNativeArtefact = {
     "arm32-vfp-hflt"
   }
 
-  s"jbrotli-native-$family-$arch"
+  s"jvmbrotli-$family-$arch"
 }
 
 libraryDependencies ++= Seq(
-  "org.meteogroup.jbrotli" % "jbrotli" % "0.5.0",
-  "org.meteogroup.jbrotli" % brotliNativeArtefact % "0.5.0" % "provided"
+  "com.nixxcode.jvmbrotli" % "jvmbrotli" % "0.2.0",
+  "com.nixxcode.jvmbrotli" % brotliNativeArtifact % "0.2.0" % "provided"
 )
 
 
