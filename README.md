@@ -1,6 +1,9 @@
 sbt-web-brotli
 ==========
 
+[![build](https://github.com/dwickern/sbt-web-brotli/workflows/build/badge.svg)](https://github.com/dwickern/sbt-web-brotli/actions)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.dwickern/sbt-web-brotli/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.dwickern/sbt-web-brotli)
+
 [sbt-web] plugin for brotli-compressing web assets using [jvmbrotli] bindings.
 
 Rewritten from [sbt-gzip] sources, thanks to Typesafe/Lightbend.
