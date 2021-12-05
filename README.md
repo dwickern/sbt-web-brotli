@@ -58,7 +58,7 @@ brotli / excludeFilter := HiddenFileFilter || "*.woff" || "*.woff2" || "*.gz"
 
 ### Usage with sbt-gzip
 
-If you also use `sbt-gzip`, make sure `brotli` comes after `gzip` in the pipeline:
+If you also use [sbt-gzip], make sure `brotli` comes after `gzip` in the pipeline:
 
 ```scala
 pipelineStages := Seq(gzip, brotli)
