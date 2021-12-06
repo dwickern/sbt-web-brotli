@@ -5,11 +5,17 @@ sbtPlugin := true
 
 enablePlugins(ScriptedPlugin)
 scriptedLaunchOpts += s"-Dproject.version=${version.value}"
+scriptedDependencies := {
+  // publish to maven instead of ivy, in order to activate maven profiles on Windows
+  (Test / compile).value
+  publishM2.value
+}
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-web" % "1.4.4")
 
+val jvmBrotliVersion = "0.2.0"
 libraryDependencies ++= Seq(
-  "com.nixxcode.jvmbrotli" % "jvmbrotli" % "0.2.0",
+  "com.nixxcode.jvmbrotli" % "jvmbrotli" % jvmBrotliVersion
 )
 
 publishTo := sonatypePublishToBundle.value
@@ -38,6 +44,40 @@ pomExtra := {
         <url>https://github.com/enalmada</url>
       </developer>
     </developers>
+    <profiles>
+      <profile>
+        <id>win32-x86-amd64</id>
+        <activation>
+          <os>
+            <family>windows</family>
+            <arch>amd64</arch>
+          </os>
+        </activation>
+        <dependencies>
+          <dependency>
+            <groupId>com.nixxcode.jvmbrotli</groupId>
+            <artifactId>jvmbrotli-win32-x86-amd64</artifactId>
+            <version>{jvmBrotliVersion}</version>
+          </dependency>
+        </dependencies>
+      </profile>
+      <profile>
+        <id>win32-x86</id>
+        <activation>
+          <os>
+            <family>windows</family>
+            <arch>x86</arch>
+          </os>
+        </activation>
+        <dependencies>
+          <dependency>
+            <groupId>com.nixxcode.jvmbrotli</groupId>
+            <artifactId>jvmbrotli-win32-x86</artifactId>
+            <version>{jvmBrotliVersion}</version>
+          </dependency>
+        </dependencies>
+      </profile>
+    </profiles>
 }
 
 import ReleaseTransformations._
