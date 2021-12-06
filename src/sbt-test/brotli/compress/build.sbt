@@ -1,4 +1,4 @@
-lazy val root = (project in file(".")).enablePlugins(SbtWeb)
+enablePlugins(SbtWeb)
 
 pipelineStages := Seq(brotli)
 

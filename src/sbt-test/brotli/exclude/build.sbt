@@ -1,10 +1,10 @@
-val root = (project in file(".")).enablePlugins(SbtWeb)
+enablePlugins(SbtWeb)
 
 pipelineStages := Seq(brotli)
 
 // set an exclude filter for css files
 
-excludeFilter in brotli := "*.css"
+brotli / excludeFilter := "*.css"
 
 // for checking that the produced pipeline mappings are correct
 
