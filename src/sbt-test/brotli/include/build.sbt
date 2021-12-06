@@ -1,10 +1,10 @@
-val root = (project in file(".")).enablePlugins(SbtWeb)
+enablePlugins(SbtWeb)
 
 pipelineStages := Seq(brotli)
 
 // set an include filter for js files only
 
-includeFilter in brotli := "*.js"
+brotli / includeFilter := "*.js"
 
 // for checking that the produced pipeline mappings are correct
 
