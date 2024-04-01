@@ -11,8 +11,6 @@ addSbtPlugin("com.github.sbt" % "sbt-web" % "1.5.5")
 libraryDependencies ++= Seq(
   "com.aayushatharva.brotli4j" % "brotli4j" % "1.16.0"
 )
-
-publishTo := sonatypePublishToBundle.value
 pomExtra := {
   <url>https://github.com/dwickern/sbt-web-brotli</url>
     <licenses>
@@ -39,19 +37,3 @@ pomExtra := {
       </developer>
     </developers>
 }
-
-import ReleaseTransformations._
-releaseProcess := Seq[ReleaseStep](
-  checkSnapshotDependencies,
-  inquireVersions,
-  runClean,
-  runTest,
-  setReleaseVersion,
-  commitReleaseVersion,
-  tagRelease,
-  releaseStepCommandAndRemaining("publishSigned"),
-  releaseStepCommand("sonatypeBundleRelease"),
-  setNextVersion,
-  commitNextVersion,
-  pushChanges
-)
