@@ -11,7 +11,7 @@ scriptedDependencies := {
   publishM2.value
 }
 
-addSbtPlugin("com.typesafe.sbt" % "sbt-web" % "1.4.4")
+addSbtPlugin("com.github.sbt" % "sbt-web" % "1.5.3")
 
 val jvmBrotliVersion = "0.2.0"
 libraryDependencies ++= Seq(
