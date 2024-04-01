@@ -1,7 +1,7 @@
 package com.github.dwickern.sbt.brotli
 
-import com.nixxcode.jvmbrotli.common.BrotliLoader
-import com.nixxcode.jvmbrotli.enc.BrotliOutputStream
+import com.aayushatharva.brotli4j.Brotli4jLoader
+import com.aayushatharva.brotli4j.encoder.BrotliOutputStream
 import com.typesafe.sbt.web.SbtWeb
 import com.typesafe.sbt.web.pipeline.Pipeline
 import sbt.Keys._
@@ -31,9 +31,7 @@ object SbtWebBrotli extends AutoPlugin {
   )
 
   private def brotliFiles: Def.Initialize[Task[Pipeline.Stage]] = Def.task {
-    if (!BrotliLoader.isBrotliAvailable) {
-      sys.error("Brotli native library could not be loaded")
-    }
+    Brotli4jLoader.ensureAvailability()
     val targetDir = (brotli / target).value
     val include = (brotli / includeFilter).value
     val exclude = (brotli / excludeFilter).value
