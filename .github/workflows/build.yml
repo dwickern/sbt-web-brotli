@@ -23,9 +23,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-
-    - name: Coursier Cache
-      uses: coursier/cache-action@v6
+        cache: 'sbt'
 
     - name: Run tests
       run: sbt test scripted
