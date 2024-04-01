@@ -5,11 +5,6 @@ sbtPlugin := true
 
 enablePlugins(ScriptedPlugin)
 scriptedLaunchOpts += s"-Dproject.version=${version.value}"
-scriptedDependencies := {
-  // publish to maven instead of ivy, in order to activate maven profiles on Windows
-  (Test / compile).value
-  publishM2.value
-}
 
 addSbtPlugin("com.github.sbt" % "sbt-web" % "1.5.5")
 
