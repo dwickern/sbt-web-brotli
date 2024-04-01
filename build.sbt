@@ -13,9 +13,8 @@ scriptedDependencies := {
 
 addSbtPlugin("com.github.sbt" % "sbt-web" % "1.5.5")
 
-val jvmBrotliVersion = "0.2.0"
 libraryDependencies ++= Seq(
-  "com.nixxcode.jvmbrotli" % "jvmbrotli" % jvmBrotliVersion
+  "com.aayushatharva.brotli4j" % "brotli4j" % "1.16.0"
 )
 
 publishTo := sonatypePublishToBundle.value
@@ -44,40 +43,6 @@ pomExtra := {
         <url>https://github.com/enalmada</url>
       </developer>
     </developers>
-    <profiles>
-      <profile>
-        <id>win32-x86-amd64</id>
-        <activation>
-          <os>
-            <family>windows</family>
-            <arch>amd64</arch>
-          </os>
-        </activation>
-        <dependencies>
-          <dependency>
-            <groupId>com.nixxcode.jvmbrotli</groupId>
-            <artifactId>jvmbrotli-win32-x86-amd64</artifactId>
-            <version>{jvmBrotliVersion}</version>
-          </dependency>
-        </dependencies>
-      </profile>
-      <profile>
-        <id>win32-x86</id>
-        <activation>
-          <os>
-            <family>windows</family>
-            <arch>x86</arch>
-          </os>
-        </activation>
-        <dependencies>
-          <dependency>
-            <groupId>com.nixxcode.jvmbrotli</groupId>
-            <artifactId>jvmbrotli-win32-x86</artifactId>
-            <version>{jvmBrotliVersion}</version>
-          </dependency>
-        </dependencies>
-      </profile>
-    </profiles>
 }
 
 import ReleaseTransformations._
