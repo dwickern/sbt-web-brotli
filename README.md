@@ -16,7 +16,7 @@ Usage
 Add the plugin to `project/plugins.sbt`:
 
 ```scala
-addSbtPlugin("com.github.dwickern" % "sbt-web-brotli" % "1.1.0")
+addSbtPlugin("com.github.dwickern" % "sbt-web-brotli" % "2.0.0")
 ```
 
 Add `brotli` to the sbt-web asset pipeline in your `build.sbt`:
