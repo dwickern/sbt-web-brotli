@@ -10,11 +10,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-java@v4
+
+      - name: Setup Java & Scala
+        uses: coursier/setup-action@v1
         with:
-          distribution: temurin
-          java-version: 8
-          cache: sbt
+          jvm: 8
+          apps: sbt
+
       - run: sbt ci-release
         env:
           PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
