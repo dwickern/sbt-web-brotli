@@ -2,7 +2,7 @@ sbt-web-brotli
 ==========
 
 [![build](https://github.com/dwickern/sbt-web-brotli/workflows/build/badge.svg)](https://github.com/dwickern/sbt-web-brotli/actions)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.dwickern/sbt-web-brotli/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.dwickern/sbt-web-brotli)
+[![sbt-web-brotli Scala version support](https://index.scala-lang.org/dwickern/sbt-web-brotli/sbt-web-brotli/latest.svg)](https://index.scala-lang.org/dwickern/sbt-web-brotli/sbt-web-brotli)
 
 [Play Framework] and [sbt-web] plugin for brotli-compressing web assets at build-time using [brotli4j] bindings.
 
